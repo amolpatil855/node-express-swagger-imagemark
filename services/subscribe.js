@@ -8,7 +8,7 @@ module.exports = {
 };
 
 function sendSubscribeMail(auth, data, cb) {
-  let name = data.token.card.name ? data.token.card.name : `` + data.first_name + ` ` +data.last_name
+  let name = data.token.card.name ? data.token.card.name : 'User';
   const message = {
     from: `App <noreply@myserver.com>`,
     to: data.token.email,
@@ -269,7 +269,7 @@ function sendSubscribeMail(auth, data, cb) {
                           <!--[if mso]><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="padding-right: 40px; padding-left: 40px; padding-top: 15px; padding-bottom: 10px; font-family: Tahoma, sans-serif"><![endif]-->
                           <div style="color:#555555;font-family:Trebuchet MS, Lucida Grande, Lucida Sans Unicode, Lucida Sans, Tahoma, sans-serif;line-height:1.5;padding-top:15px;padding-right:40px;padding-bottom:10px;padding-left:40px;">
                             <div style="line-height: 1.5; font-family: Trebuchet MS, Lucida Grande, Lucida Sans Unicode, Lucida Sans, Tahoma, sans-serif; font-size: 12px; color: #555555; mso-line-height-alt: 18px;">
-                              <p style="font-size: 16px; line-height: 1.5; word-break: break-word; font-family: inherit; mso-line-height-alt: 24px; margin: 0;"><span style="font-size: 16px; color: #000000;">Hi ` + name? name : 'User' +`,</span></p>
+                              <p style="font-size: 16px; line-height: 1.5; word-break: break-word; font-family: inherit; mso-line-height-alt: 24px; margin: 0;"><span style="font-size: 16px; color: #000000;">Hi `+ name +`,</span></p>
                               <p style="font-size: 12px; line-height: 1.5; word-break: break-word; font-family: inherit; mso-line-height-alt: 18px; margin: 0;">&nbsp;</p>
                               <p style="font-size: 16px; line-height: 1.5; word-break: break-word; font-family: inherit; mso-line-height-alt: 24px; margin: 0;"><span style="font-size: 16px; color: #000000;">Thank you for using the PLANNAME! We've successfully processed your payment of ` +
       data.amount +
