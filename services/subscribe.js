@@ -476,7 +476,7 @@ function mailsend(auth, message, cb) {
       console.log("sendMail----in--err", err);
     }
     console.log("sendMail----in");
-    return;
+    cb();
   });
 }
 

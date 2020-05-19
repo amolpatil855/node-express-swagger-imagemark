@@ -17,15 +17,12 @@ function payment(authMail, stripeSecretKey, data, cb) {
     currency: "inr",
   };
 
-  stripe.charges.create(body, (stripeErr, stripeRes) => {
-    if (stripeErr) {
-      cb(stripeErr);
-    } else {
-      console.log('out-------')
+  stripe.charges.create(body)
+    .then((stripeRes) => {
       this.subscribeService.sendSubscribeMailAsync(authMail, data)
       cb();
-    }
-  });
+    })
+    .catch((e) => cb(e));
 }
 
 Promise.promisifyAll(module.exports);
