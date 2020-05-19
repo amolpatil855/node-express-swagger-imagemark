@@ -271,14 +271,12 @@ function sendSubscribeMail(auth, data, cb) {
                             <div style="line-height: 1.5; font-family: Trebuchet MS, Lucida Grande, Lucida Sans Unicode, Lucida Sans, Tahoma, sans-serif; font-size: 12px; color: #555555; mso-line-height-alt: 18px;">
                               <p style="font-size: 16px; line-height: 1.5; word-break: break-word; font-family: inherit; mso-line-height-alt: 24px; margin: 0;"><span style="font-size: 16px; color: #000000;">Hi `+ name +`,</span></p>
                               <p style="font-size: 12px; line-height: 1.5; word-break: break-word; font-family: inherit; mso-line-height-alt: 18px; margin: 0;">&nbsp;</p>
-                              <p style="font-size: 16px; line-height: 1.5; word-break: break-word; font-family: inherit; mso-line-height-alt: 24px; margin: 0;"><span style="font-size: 16px; color: #000000;">Thank you for using the PLANNAME! We've successfully processed your payment of ` +
-      data.amount +
-      `.</span></p>
+                              <p style="font-size: 16px; line-height: 1.5; word-break: break-word; font-family: inherit; mso-line-height-alt: 24px; margin: 0;"><span style="font-size: 16px; color: #000000;">Thank you for using the ` + data.plan_type + `! We've successfully processed your payment of ` +data.amount +`.</span></p>
                               <p style="font-size: 12px; line-height: 1.5; word-break: break-word; font-family: inherit; mso-line-height-alt: 18px; margin: 0;">&nbsp;</p>
                               <p style="font-size: 12px; line-height: 1.5; word-break: break-word; font-family: inherit; mso-line-height-alt: 18px; margin: 0;"><span style="color: #000000;">&nbsp;</span></p>
-                              <p style="line-height: 1.5; font-family: inherit; word-break: break-word; font-size: 16px; mso-line-height-alt: 24px; margin: 0;"><span style="font-size: 16px; color: #000000;">You can access your subcription information from <a style="text-decoration: underline;" href="google.com" target="_blank" rel="noopener">your setting page</a>. If</span></p>
-                              <p style="line-height: 1.5; font-family: inherit; word-break: break-word; font-size: 16px; mso-line-height-alt: 24px; margin: 0;"><span style="font-size: 16px; color: #000000;">you have any further questions please visit out <a style="text-decoration: underline;" href="google.com" target="_blank" rel="noopener">help center</a> or <a style="text-decoration: underline;" href="google.com" target="_blank" rel="noopener">contact</a></span></p>
-                              <p style="line-height: 1.5; font-family: inherit; word-break: break-word; font-size: 16px; mso-line-height-alt: 24px; margin: 0;"><span style="font-size: 16px; color: #000000;"><a style="text-decoration: underline;" href="google.com" target="_blank" rel="noopener">support</a>.</span></p>
+                              <p style="line-height: 1.5; font-family: inherit; word-break: break-word; font-size: 16px; mso-line-height-alt: 24px; margin: 0;"><span style="font-size: 16px; color: #000000;">You can access your subcription information from <a style="text-decoration: underline;" href="https://enigmatic-castle-16752.herokuapp.com" target="_blank" rel="noopener">your setting page</a>. If</span></p>
+                              <p style="line-height: 1.5; font-family: inherit; word-break: break-word; font-size: 16px; mso-line-height-alt: 24px; margin: 0;"><span style="font-size: 16px; color: #000000;">you have any further questions please visit out <a style="text-decoration: underline;" href="https://enigmatic-castle-16752.herokuapp.com" target="_blank" rel="noopener">help center</a> or <a style="text-decoration: underline;" href="https://enigmatic-castle-16752.herokuapp.com" target="_blank" rel="noopener">contact</a></span></p>
+                              <p style="line-height: 1.5; font-family: inherit; word-break: break-word; font-size: 16px; mso-line-height-alt: 24px; margin: 0;"><span style="font-size: 16px; color: #000000;"><a style="text-decoration: underline;" href="https://enigmatic-castle-16752.herokuapp.com" target="_blank" rel="noopener">support</a>.</span></p>
                               <p style="font-size: 12px; line-height: 1.5; word-break: break-word; font-family: inherit; mso-line-height-alt: 18px; margin: 0;">&nbsp;</p>
                             </div>
                           </div>
@@ -470,9 +468,8 @@ function mailsend(auth, message, cb) {
 
   transporter.sendMail(message, function (err, info) {
     if (err) {
-      console.log("sendMail----in--err", err);
+      console.log("sendMail---err", err);
     }
-    console.log("sendMail----in");
     cb();
   });
 }
