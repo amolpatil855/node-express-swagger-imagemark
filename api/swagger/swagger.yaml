@@ -107,7 +107,7 @@ definitions:
         type: object
         description: User's token object
       amount:
-        type: string
+        type: number
         description: User's amount
   HelloWorldResponse:
     required:
