@@ -17,9 +17,11 @@ function payment(authMail, stripeSecretKey, data, cb) {
     currency: "inr",
   };
 
+  // subscribeService.sendSubscribeMailAsync(authMail, data)
+  // cb();
   stripe.charges.create(body)
     .then((stripeRes) => {
-      this.subscribeService.sendSubscribeMailAsync(authMail, data)
+      subscribeService.sendSubscribeMailAsync(authMail, data)
       cb();
     })
     .catch((e) => cb(e));
