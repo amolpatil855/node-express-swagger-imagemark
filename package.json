@@ -1,0 +1,33 @@
+{
+  "name": "node-express-swagger",
+  "version": "0.0.1",
+  "private": true,
+  "description": "New Swagger API Project",
+  "keywords": [],
+  "author": "",
+  "license": "",
+  "main": "app.js",
+  "dependencies": {
+    "bluebird": "^3.7.2",
+    "express": "^4.12.3",
+    "express-boom": "^3.0.0",
+    "helmet": "^3.22.0",
+    "jsonwebtoken": "^8.5.1",
+    "lodash": "^4.17.15",
+    "nodemailer": "^6.4.6",
+    "pg": "^8.0.3",
+    "sequelize": "^5.21.7",
+    "stripe": "^8.53.0",
+    "swagger-express-mw": "^0.7.0",
+    "winston": "^3.2.1",
+    "winston-daily-rotate-file": "^4.4.2"
+  },
+  "devDependencies": {
+    "should": "^7.1.0",
+    "supertest": "^1.0.0"
+  },
+  "scripts": {
+    "start": "node app.js",
+    "test": "swagger project test"
+  }
+}

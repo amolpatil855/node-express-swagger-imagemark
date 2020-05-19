@@ -1,0 +1,123 @@
+swagger: "2.0"
+info:
+  version: "0.0.1"
+  title: Hello World App
+# during dev, should point to your local machine
+host: localhost:3000
+# basePath prefixes all resource paths 
+basePath: /
+# 
+schemes:
+  # tip: remove http to make production-grade
+  - http
+  - https
+# format of bodies a client can send (Content-Type)
+consumes:
+  - application/json
+# format of the responses to the client (Accepts)
+produces:
+  - application/json
+paths:
+  /subscribe:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: subscribe
+    post:
+      description: Returns 'subscribe' to the caller
+      # used as the method name of the controller
+      operationId: subscribe
+      parameters:
+        - name: body
+          required: true
+          in: body
+          schema:
+            $ref: '#/definitions/SubscribeRequest'
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/HelloWorldResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /payment:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: payment
+    post:
+      description: Returns 'payment' to the caller
+      # used as the method name of the controller
+      operationId: makePayment
+      parameters:
+        - name: body
+          required: true
+          in: body
+          schema:
+            $ref: '#/definitions/PaymentRequest'
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/HelloWorldResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /swagger:
+    x-swagger-pipe: swagger_raw
+# complex objects have schema definitions
+definitions:
+  SubscribeRequest:
+    required:
+      - first_name
+      - last_name
+      - email
+      - plan_type
+      - amount
+    properties:
+      first_name:
+        type: string
+        pattern: ^[a-zA-Z]+$
+        minLength: 2
+        description: User's first name
+      last_name:
+        type: string
+        pattern: ^[a-zA-Z]+$
+        minLength: 2
+        description: User's last name
+      email:
+        type: string
+        format: email
+        description: User's email address
+      plan_type:
+        type: string
+        description: User's plan type
+      amount:
+        type: number
+        description: User's amount
+  PaymentRequest:
+    required:
+      - source
+      - amount
+    properties:
+      source:
+        type: object
+        description: User's source
+      amount:
+        type: string
+        description: User's amount
+  HelloWorldResponse:
+    required:
+      - message
+    properties:
+      message:
+        type: string
+  ErrorResponse:
+    required:
+      - message
+    properties:
+      message:
+        type: string

@@ -1,0 +1,14 @@
+{
+  "serverConfig" : {
+    "logDir": "logs",
+    "logLevel" : "debug",
+    "debug": true
+  },
+  "pgDatabase": {
+    "user": "",
+    "password": "",
+    "database": "",
+    "host": "",
+    "port": ""
+  }
+}
