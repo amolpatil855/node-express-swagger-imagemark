@@ -22,8 +22,8 @@ function payment(authMail, stripeSecretKey, data, cb) {
       cb(stripeErr);
     } else {
       console.log('out-------')
-      cb();
       this.subscribeService.sendSubscribeMailAsync(authMail, data)
+      cb();
     }
   });
 }
