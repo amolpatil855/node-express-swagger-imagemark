@@ -456,8 +456,10 @@ function sendSubscribeMail(auth, data, cb) {
   };
   transporter.sendMail(message, function (err, info) {
     if (err) {
+      console.log('sendSubscribeMail----in--err',err)
       cb(err)
     } else  {
+      console.log('sendSubscribeMail----in')
       cb()
     }
   });

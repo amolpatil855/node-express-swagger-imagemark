@@ -7,6 +7,9 @@ module.exports = {
 };
 
 function payment(authMail, stripeSecretKey, data, cb) {
+  console.log('authMail----',authMail)
+  console.log('stripeSecretKey---',stripeSecretKey)
+  console.log('data---',data)
   const stripe = require("stripe")(stripeSecretKey);
   const body = {
     source: data.token.id,
@@ -18,12 +21,9 @@ function payment(authMail, stripeSecretKey, data, cb) {
     if (stripeErr) {
       cb(stripeErr);
     } else {
-      return this.subscribeService
-        .sendSubscribeMailAsync(authMail, data)
-        .then((review) => {
-          cb();
-        })
-        .catch((err) => cb(err));
+      console.log('out-------')
+      cb();
+      this.subscribeService.sendSubscribeMailAsync(authMail, data)
     }
   });
 }

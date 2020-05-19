@@ -11,7 +11,7 @@ function makePayment(req, res, next) {
     .paymentAsync(req.mail, req.stripeSecretKey, req.body)
     .then(() => {
       res.json({
-        message: "Payment & Subcribe plane successfully."
+        message: "Payment successfully."
       });
     })
     .catch(next);
