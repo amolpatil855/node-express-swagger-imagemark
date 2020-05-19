@@ -100,12 +100,12 @@ definitions:
         description: User's amount
   PaymentRequest:
     required:
-      - source
+      - token
       - amount
     properties:
-      source:
+      token:
         type: object
-        description: User's source
+        description: User's token object
       amount:
         type: string
         description: User's amount
