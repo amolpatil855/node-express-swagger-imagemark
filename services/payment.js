@@ -14,7 +14,7 @@ function payment(authMail, stripeSecretKey, data, cb) {
   const body = {
     source: data.token.id,
     amount: data.amount,
-    currency: "inr",
+    currency: data.currency
   };
 
   // subscribeService.sendSubscribeMailAsync(authMail, data)

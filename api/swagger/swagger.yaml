@@ -102,12 +102,16 @@ definitions:
     required:
       - token
       - amount
+      - currency
     properties:
       token:
         type: object
         description: User's token object
       amount:
         type: number
+        description: User's amount
+      currency:
+        type: string
         description: User's amount
   HelloWorldResponse:
     required:
