@@ -1,25 +1,19 @@
-'use strict';
-let Promise = require('bluebird');
+"use strict";
+let Promise = require("bluebird");
 let nodeMailer = require("nodemailer");
 
 module.exports = {
-  sendSubscribeMail: sendSubscribeMail
+  sendSubscribeMail: sendSubscribeMail,
+  mailsend: mailsend,
 };
 
 function sendSubscribeMail(auth, data, cb) {
-  var transporter = nodeMailer.createTransport({
-    service: "gmail",
-    auth: {
-      user: auth.email,
-      pass: auth.password,
-    },
-  });
-
   const message = {
     from: `App <noreply@myserver.com>`,
     to: data.email,
-    subject: `Subscription plan `+ data.plan_type +` | IMAGEMARK`,
-    html: `<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional //EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+    subject: `Subscription plan ` + data.plan_type + ` | IMAGEMARK`,
+    html:
+      `<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional //EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
     <html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
     
     <head>
@@ -274,9 +268,15 @@ function sendSubscribeMail(auth, data, cb) {
                           <!--[if mso]><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="padding-right: 40px; padding-left: 40px; padding-top: 15px; padding-bottom: 10px; font-family: Tahoma, sans-serif"><![endif]-->
                           <div style="color:#555555;font-family:Trebuchet MS, Lucida Grande, Lucida Sans Unicode, Lucida Sans, Tahoma, sans-serif;line-height:1.5;padding-top:15px;padding-right:40px;padding-bottom:10px;padding-left:40px;">
                             <div style="line-height: 1.5; font-family: Trebuchet MS, Lucida Grande, Lucida Sans Unicode, Lucida Sans, Tahoma, sans-serif; font-size: 12px; color: #555555; mso-line-height-alt: 18px;">
-                              <p style="font-size: 16px; line-height: 1.5; word-break: break-word; font-family: inherit; mso-line-height-alt: 24px; margin: 0;"><span style="font-size: 16px; color: #000000;">Hi `+ data.first_name.toUpperCase() +` `+ data.last_name.toUpperCase() +`,</span></p>
+                              <p style="font-size: 16px; line-height: 1.5; word-break: break-word; font-family: inherit; mso-line-height-alt: 24px; margin: 0;"><span style="font-size: 16px; color: #000000;">Hi ` +
+      data.first_name.toUpperCase() +
+      ` ` +
+      data.last_name.toUpperCase() +
+      `,</span></p>
                               <p style="font-size: 12px; line-height: 1.5; word-break: break-word; font-family: inherit; mso-line-height-alt: 18px; margin: 0;">&nbsp;</p>
-                              <p style="font-size: 16px; line-height: 1.5; word-break: break-word; font-family: inherit; mso-line-height-alt: 24px; margin: 0;"><span style="font-size: 16px; color: #000000;">Thank you for using the PLANNAME! We've successfully processed your payment of `+ data.amount +`.</span></p>
+                              <p style="font-size: 16px; line-height: 1.5; word-break: break-word; font-family: inherit; mso-line-height-alt: 24px; margin: 0;"><span style="font-size: 16px; color: #000000;">Thank you for using the PLANNAME! We've successfully processed your payment of ` +
+      data.amount +
+      `.</span></p>
                               <p style="font-size: 12px; line-height: 1.5; word-break: break-word; font-family: inherit; mso-line-height-alt: 18px; margin: 0;">&nbsp;</p>
                               <p style="font-size: 12px; line-height: 1.5; word-break: break-word; font-family: inherit; mso-line-height-alt: 18px; margin: 0;"><span style="color: #000000;">&nbsp;</span></p>
                               <p style="line-height: 1.5; font-family: inherit; word-break: break-word; font-size: 16px; mso-line-height-alt: 24px; margin: 0;"><span style="font-size: 16px; color: #000000;">You can access your subcription information from <a style="text-decoration: underline;" href="google.com" target="_blank" rel="noopener">your setting page</a>. If</span></p>
@@ -452,17 +452,32 @@ function sendSubscribeMail(auth, data, cb) {
       </table>
       <!--[if (IE)]></div><![endif]-->
     </body>
-    </html>`
+    </html>`,
   };
-  transporter.sendMail(message, function (err, info) {
-    if (err) {
-      console.log('sendSubscribeMail----in--err',err)
-    }
-    console.log('sendSubscribeMail----in')
-    cb()
-  });
+
+  return this.mailsendAsync(auth, message)
+    .then(() => {
+      cb();
+    })
+    .catch((e) => cb(e));
 }
 
+function mailsend(auth, message, cb) {
+  var transporter = nodeMailer.createTransport({
+    service: "gmail",
+    auth: {
+      user: auth.email,
+      pass: auth.password,
+    },
+  });
 
+  transporter.sendMail(message, function (err, info) {
+    if (err) {
+      console.log("sendMail----in--err", err);
+    }
+    console.log("sendMail----in");
+    return;
+  });
+}
 
 Promise.promisifyAll(module.exports);
