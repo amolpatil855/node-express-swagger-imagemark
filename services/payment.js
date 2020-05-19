@@ -13,9 +13,11 @@ function payment(authMail, stripeSecretKey, data, cb) {
   const stripe = require("stripe")(stripeSecretKey);
   const body = {
     source: data.token.id,
-    amount: data.amount,
-    currency: data.currency
+    amount: data.amount
   };
+  if(data.currency) {
+    body['currency'] = data.currency
+  }
 
   // subscribeService.sendSubscribeMailAsync(authMail, data)
   // cb();
