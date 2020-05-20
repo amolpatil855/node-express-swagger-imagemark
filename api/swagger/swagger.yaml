@@ -72,22 +72,16 @@ paths:
 definitions:
   SubscribeRequest:
     required:
-      - first_name
-      - last_name
+      - name
       - email
       - plan_type
       - amount
     properties:
-      first_name:
+      name:
         type: string
         pattern: ^[a-zA-Z]+$
         minLength: 2
-        description: User's first name
-      last_name:
-        type: string
-        pattern: ^[a-zA-Z]+$
-        minLength: 2
-        description: User's last name
+        description: User's name
       email:
         type: string
         format: email
@@ -100,12 +94,9 @@ definitions:
         description: User's amount
   PaymentRequest:
     required:
-      - token
       - amount
+      - currency
     properties:
-      token:
-        type: object
-        description: User's token object
       amount:
         type: number
         description: User's amount

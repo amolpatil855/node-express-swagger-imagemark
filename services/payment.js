@@ -1,30 +1,22 @@
 "use strict";
-let Promise = require('bluebird');
+let Promise = require("bluebird");
 let subscribeService = require("./subscribe");
 
 module.exports = {
   payment: payment,
 };
 
-function payment(authMail, stripeSecretKey, data, cb) {
-  console.log('authMail----',authMail)
-  console.log('stripeSecretKey---',stripeSecretKey)
-  console.log('data---',data)
+function payment(stripeSecretKey, data, cb) {
   const stripe = require("stripe")(stripeSecretKey);
   const body = {
-    source: data.token.id,
-    amount: data.amount
+    amount: data.amount,
+    currency: data.currency
   };
-  if(data.currency) {
-    body['currency'] = data.currency
-  }
 
-  // subscribeService.sendSubscribeMailAsync(authMail, data)
-  // cb();
-  stripe.charges.create(body)
-    .then((stripeRes) => {
-      subscribeService.sendSubscribeMailAsync(authMail, data)
-      cb();
+  stripe.paymentIntents
+    .create(body)
+    .then((paymentIntentRes) => {
+      cb(null, paymentIntentRes);
     })
     .catch((e) => cb(e));
 }
