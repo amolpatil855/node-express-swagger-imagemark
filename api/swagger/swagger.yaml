@@ -79,8 +79,6 @@ definitions:
     properties:
       name:
         type: string
-        pattern: ^[a-zA-Z]+$
-        minLength: 2
         description: User's name
       email:
         type: string

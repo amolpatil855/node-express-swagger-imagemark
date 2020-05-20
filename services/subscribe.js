@@ -8,10 +8,10 @@ module.exports = {
 };
 
 function sendSubscribeMail(auth, data, cb) {
-  let name = data.token.card.name ? data.token.card.name : 'User';
+  let name = data.name ? data.name : 'User';
   const message = {
     from: `App <noreply@myserver.com>`,
-    to: data.token.email,
+    to: data.email,
     subject: `Subscription plan ` + data.plan_type + ` | IMAGEMARK`,
     html:
       `<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional //EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -271,7 +271,7 @@ function sendSubscribeMail(auth, data, cb) {
                             <div style="line-height: 1.5; font-family: Trebuchet MS, Lucida Grande, Lucida Sans Unicode, Lucida Sans, Tahoma, sans-serif; font-size: 12px; color: #555555; mso-line-height-alt: 18px;">
                               <p style="font-size: 16px; line-height: 1.5; word-break: break-word; font-family: inherit; mso-line-height-alt: 24px; margin: 0;"><span style="font-size: 16px; color: #000000;">Hi `+ name +`,</span></p>
                               <p style="font-size: 12px; line-height: 1.5; word-break: break-word; font-family: inherit; mso-line-height-alt: 18px; margin: 0;">&nbsp;</p>
-                              <p style="font-size: 16px; line-height: 1.5; word-break: break-word; font-family: inherit; mso-line-height-alt: 24px; margin: 0;"><span style="font-size: 16px; color: #000000;">Thank you for using the ` + data.plan_type + ` plan! We've successfully processed your payment of $`+ data.amount/100 +`.</span></p>
+                              <p style="font-size: 16px; line-height: 1.5; word-break: break-word; font-family: inherit; mso-line-height-alt: 24px; margin: 0;"><span style="font-size: 16px; color: #000000;">Thank you for using the ` + data.plan_type + ` plan! We've successfully processed your payment of $`+ data.amount +`.</span></p>
                               <p style="font-size: 12px; line-height: 1.5; word-break: break-word; font-family: inherit; mso-line-height-alt: 18px; margin: 0;">&nbsp;</p>
                               <p style="font-size: 12px; line-height: 1.5; word-break: break-word; font-family: inherit; mso-line-height-alt: 18px; margin: 0;"><span style="color: #000000;">&nbsp;</span></p>
                               <p style="line-height: 1.5; font-family: inherit; word-break: break-word; font-size: 16px; mso-line-height-alt: 24px; margin: 0;"><span style="font-size: 16px; color: #000000;">You can access your subcription information from <a style="text-decoration: underline;" href="https://enigmatic-castle-16752.herokuapp.com" target="_blank" rel="noopener">your setting page</a>. If</span></p>
@@ -469,6 +469,7 @@ function mailsend(auth, message, cb) {
   transporter.sendMail(message, function (err, info) {
     if (err) {
       console.log("sendMail---err", err);
+      cb(err);
     }
     cb();
   });

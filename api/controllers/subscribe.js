@@ -1,26 +1,16 @@
 "use strict";
 
 let subscribeService = require('../../services/subscribe');
-
+let commonService = require('../../services/common');
 module.exports = {
   subscribe: subscribe,
 };
 
 function subscribe(req, res, next) {
-  let data = {
-    token: {
-      card: {
-        name: req.body.first_name + " " + req.body.last_name
-      },
-      email: req.body.email
-    }
-  }
   subscribeService
-    .sendSubscribeMailAsync(req.mail, data)
+    .sendSubscribeMailAsync(req.mail, req.body)
     .then(() => {
-      res.json({
-        message: "Subcribe plane successfully.",
-      });
+      res.json(commonService.resJson('Subcribe plane successfully.', {}));
     })
     .catch(next);
 }
